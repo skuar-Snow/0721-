@@ -4,6 +4,7 @@
       :class="{show:selectlist.length>0}"
       >
             <ul class="cart_list">
+                <li v-if="selectlist.length<3"></li>
                 <li v-for="item in selectlist" :key="item.title">
                     <img :src="item.src" alt="">
                     <i
@@ -44,7 +45,7 @@ export default {
            }
         },
         del(item){
-            this.selectlist.splice(this.selectlist.indexOf(item),1);
+            this.selectlist.splice(this.selectlist.indexOf(item),1);0
         },
         updateShowConpare(val){
             this.showConpare=val;

@@ -59,19 +59,22 @@ export default {
                 this.selectlist.push(item);
             }
         },
-        selectAdd(index){
-           //向selectlist中添加当前商品，最多添加3个，并去重
-            if(this.selectlist.length<3){
-               if(!this.selectlist.includes(this.conlist[index])){
-                    this.selectlist.push(this.conlist[index])
-               }else{
-                    this.selectlist.splice(this.selectlist.indexOf(this.conlist[index]),1)
-               }
-            }else{
-                // 大于的从数据中删除
-                this.selectlist.splice(index,1)
+        selectAdd(index) {
+            // 获取当前点击的商品
+            const item = this.conlist[index];
+            // 检查 selectlist 中是否已经包含当前点击的商品
+            const existingIndex = this.selectlist.indexOf(item);
+
+            // 如果 selectlist 长度小于3或者当前商品不在 selectlist 中
+            if (this.selectlist.length < 3 && existingIndex === -1) {
+                // 添加当前商品
+                this.selectlist.push(item);
+            } else if (existingIndex !== -1) {
+                // 如果当前商品已存在，则删除它
+                this.selectlist.splice(existingIndex, 1);
             }
-            console.log(this.selectlist)
+
+            console.log(this.selectlist);
         },
         updateSpanRefs() {
             this.$refs.spans = {}; // 重置 refs 对象
@@ -105,7 +108,7 @@ export default {
                 width: 300px;
                 height: 552px;
                 margin: 17.5px;
-                background: #232529;
+                background: hsl(220, 8%, 15%);
                 >span{
                     display: block;
                     float: right;
