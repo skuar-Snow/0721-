@@ -1,9 +1,8 @@
 <template>
   <div>
     <h1>组件</h1>
-    <button @click="show = !show">显示隐藏</button>
-    <Child1 v-if="show" />
-    <Child2 />
+    <Child1 :num="num" @change="changeNum" />
+    <Child2 @change="changeNum" />
   </div>
 </template>
 
@@ -14,7 +13,12 @@ import Child2 from './components/Child2.vue'
 export default {
   data() {
     return {
-      show: true
+      num: 1
+    }
+  },
+  methods: {
+    changeNum(n) {
+      this.num += n
     }
   },
   components: {
